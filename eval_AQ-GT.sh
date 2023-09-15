@@ -1,0 +1,1 @@
+python -W ignore scripts/synthesize_full.py --config=config/multimodal_context_AQGT.yml

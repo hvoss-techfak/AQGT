@@ -1,0 +1,48 @@
+name: multimodal_context
+
+train_data_path: /mnt/ssd-tb/gesture_data/dataset_train
+val_data_path: /mnt/ssd-tb/gesture_data/dataset_val
+test_data_path: /mnt/ssd-tb/gesture_data/dataset_test
+beat_data_path: /mnt/ssd-tb/gesture_data/beat
+web_data_path: /mnt/ssd-tb/temp/webdataset
+
+wordembed_dim: 300
+wordembed_path: data/fasttext/crawl-300d-2M-subword.bin  # from https://fasttext.cc/docs/en/english-vectors.html
+#freeze_wordembed: true
+
+model_save_path: output/train_beat_with-cat_emb_with-lrelu_200ep_dis-add-layer
+random_seed: -1
+
+# model params
+model: multimodal_context
+checkpoint_path: output/final2/iva_0.91031203_103_checkpoint.bin
+
+n_layers: 4
+hidden_size: 500
+z_type: speaker  # speaker, random, none
+input_context: both  # both, audio, text, none
+max_v: 5000
+
+# train params
+epochs: 200
+batch_size: 256
+learning_rate: 2e-5
+loss_regression_weight: 500.0
+loss_gan_weight: 5.0
+loss_warmup: 10
+loss_kld_weight: 0.1
+loss_reg_weight: 0.05
+loss_vel_weight: 0.001
+
+dropout_prob: 0.1
+
+# eval params
+eval_net_path: output/gesture_autoencoder_checkpoint_best.bin
+
+# dataset params
+motion_resampling_framerate: 15
+n_poses: 34
+n_pre_poses: 4
+subdivision_stride: 8
+
+loader_workers: 8
