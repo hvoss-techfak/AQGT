@@ -1,6 +1,6 @@
 # AQ-GT / AQ-GT-A 
 
-This project is a pytorch implementation of: \
+This project is the official pytorch implementation of: \
 *AQ-GT: a Temporally Aligned and Quantized GRU-Transformer for Co-Speech Gesture Synthesis* 
 
 
