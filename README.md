@@ -1,7 +1,11 @@
 # AQ-GT / AQ-GT-A 
 
-This project is a pytorch implementation of *AQ-GT: a Temporally Aligned and Quantized GRU-Transformer for Co-Speech Gesture Synthesis* \
-with the extension (AQ-GT-A) from the paper *Augmented Co-Speech Gesture Generation: Including Form and Meaning Features to Guide Learning-Based Gesture Synthesis*. 
+This project is a pytorch implementation of: \
+*AQ-GT: a Temporally Aligned and Quantized GRU-Transformer for Co-Speech Gesture Synthesis* 
+
+
+with the extension (AQ-GT-A) from the paper: \
+*Augmented Co-Speech Gesture Generation: Including Form and Meaning Features to Guide Learning-Based Gesture Synthesis*. 
 
 ## Environment & Training 
 
