@@ -1,7 +1,11 @@
 # AQ-GT / AQ-GT-A 
 
-This project is a pytorch implementation of *AQ-GT: a Temporally Aligned and Quantized GRU-Transformer for Co-Speech Gesture Synthesis* \
-with the extension (AQ-GT-A) from the paper *Augmented Co-Speech Gesture Generation: Including Form and Meaning Features to Guide Learning-Based Gesture Synthesis*. 
+This project is a pytorch implementation of: \
+*AQ-GT: a Temporally Aligned and Quantized GRU-Transformer for Co-Speech Gesture Synthesis* 
+
+
+with the extension (AQ-GT-A) from the paper: \
+*Augmented Co-Speech Gesture Generation: Including Form and Meaning Features to Guide Learning-Based Gesture Synthesis*. 
 
 ## Environment & Training 
 
@@ -22,13 +26,15 @@ pip install -r requirements.txt
 Please refer to the [pytorch](https://pytorch.org/) page, to install pytorch.
 
 ## Training
+All data and pretrained models are licensed under the [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/) license.
+
 The AQGT dataset can be downloaded here: [link](https://uni-bielefeld.sciebo.de/s/X7VFL0azQEtVOyN)
 
 The AQGT-A SaGA dataset can be downloaded here: [link](https://uni-bielefeld.sciebo.de/s/5KMeN2zn9FfGiL6)
 
 All pretrained models can be downloaded here: [link](https://uni-bielefeld.sciebo.de/s/nYjikOr045jY2Te)
 
-All data and pretrained models are licensed under the [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/) license.
+The password for all files is: AJnbyQsn2xVkEcYrmnEfHRK3WuRoL2
 
 Please download the [Fasttext vectors](https://fasttext.cc/docs/en/english-vectors.html) and unpack them to the project root.
 
