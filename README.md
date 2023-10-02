@@ -7,6 +7,8 @@ This project is the official pytorch implementation of: \
 with the extension (AQ-GT-A) from the paper: \
 *Augmented Co-Speech Gesture Generation: Including Form and Meaning Features to Guide Learning-Based Gesture Synthesis*. 
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/aq-gt-a-temporally-aligned-and-quantized-gru/gesture-generation-on-ted-gesture-dataset)](https://paperswithcode.com/sota/gesture-generation-on-ted-gesture-dataset?p=aq-gt-a-temporally-aligned-and-quantized-gru)
+
 ## Environment & Training 
 
 This repository is developed and tested on Ubuntu 20.04, Python 3.7, and PyTorch 2.0+. 
