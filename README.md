@@ -32,9 +32,9 @@ All data and pretrained models are licensed under the [CC BY-NC 3.0](https://cre
 
 The AQGT dataset can be downloaded here: [link](https://zenodo.org/record/8406734)
 
-The AQGT-A SaGA dataset can be downloaded here: [link](https://uni-bielefeld.sciebo.de/s/5KMeN2zn9FfGiL6)
+The AQGT-A SaGA dataset can be downloaded here: [link](https://zenodo.org/record/8410803)
 
-All pretrained models can be downloaded here: [link](https://uni-bielefeld.sciebo.de/s/nYjikOr045jY2Te)
+All pretrained models can be downloaded here: [link](https://uni-bielefeld.sciebo.de/s/5tajMJrH5nPh8oD)
 
 The password for all files is: AJnbyQsn2xVkEcYrmnEfHRK3WuRoL2
 
