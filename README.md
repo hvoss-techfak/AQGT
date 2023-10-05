@@ -30,7 +30,7 @@ Please refer to the [pytorch](https://pytorch.org/) page, to install pytorch.
 ## Training
 All data and pretrained models are licensed under the [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/) license.
 
-The AQGT dataset can be downloaded here: [link](https://uni-bielefeld.sciebo.de/s/X7VFL0azQEtVOyN)
+The AQGT dataset can be downloaded here: [link](https://zenodo.org/record/8406734)
 
 The AQGT-A SaGA dataset can be downloaded here: [link](https://uni-bielefeld.sciebo.de/s/5KMeN2zn9FfGiL6)
 
