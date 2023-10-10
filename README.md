@@ -91,14 +91,15 @@ You can evaluate the framework and generate videos of the gestures by executing 
 ``` bash eval_AQ-GT.sh ``` for the evaluation of the AQ-GT model. \
 ``` bash eval_AQ-GT-A.sh ``` for the evaluation of the AQ-GT-A model. 
 
-Currently, the framework only takes precreated lmdb data files as input 
-and has no direct interface to create realtime or on-the-fly gestures from videos.
+Currently, the framework only takes precreated lmdb data files as input and has no direct interface to create realtime or on-the-fly gestures from videos.
+As part of our ongoing effort, we will add these functionality in the following weeks.
 
 If you want to create a new lmdb data file, please refer to the "new-youtube-gesture-dataset" folder. \
 The pipeline is essentially the same as the original [youtube-gesture-dataset](https://github.com/youngwoo-yoon/youtube-gesture-dataset). 
 
 Todo: 
 - We are currently in the process of releasing the tracking solution for our dataset, which will be done at a later date.
+- The realtime inference code is currently missing and will be released in the following weeks
 
 ## Citation
 
