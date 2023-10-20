@@ -56,7 +56,7 @@ def toEntityMap(entity_names):
 
 
 def toPhaseMap(phase_names):
-    phase_list = {"prep": 0, "stroke": 1, "stroke ": 1, "retr": 2, "post.hold": 3, "pre.hold": 4, '': -1}
+    phase_list = {"prep": 0, "stroke": 1, "stroke ": 1,"stroke\n": 1, "retr": 2, "post.hold": 3, "pre.hold": 4, '': -1}
     ret = np.zeros((34,))
     for i, f_entity in enumerate(phase_names):
         try:
@@ -68,7 +68,7 @@ def toPhaseMap(phase_names):
 
 
 def toPhraseMap(phrase_names):
-    phrase_list = {"beat": 0, "iconic": 1, 'iconic \n': 1, 'iconic\n\n': 1, "deictic": 2, "deictic-beat": 2,
+    phrase_list = {"beat": 0, "iconic": 1, "iconic ": 1, 'iconic \n': 1, 'iconic\n\n': 1, "deictic": 2, "deictic-beat": 2,
                    "deictic-discourse": 2,
                    "iconic-deictic": 3, "discourse": 4, "discourse/beat": 4, "discourse/indexing": 4,
                    "discourse-beat": 4, "discourse-iconic": 4, "move": 5, "iconic-beat": 5, "iconic-deictic-beat": 7,
