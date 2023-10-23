@@ -201,6 +201,8 @@ class Lightning_Trainer(LightningModule):
             self.beat_gen_optimizer._clear_and_load_backup()
 
     def do_validation(self, batch, embed_space):
+        import copy
+        batch = copy.deepcopy(batch)
         time_seq, text_lengths, in_text_padded, _, target_vec, in_audio, audio_var_bottom, audio_var_top, in_spec, aux_info, annotation = batch
 
         pre_seq = target_vec.new_zeros((target_vec.shape[0], target_vec.shape[1], target_vec.shape[2] + 1)).to(device)
