@@ -28,6 +28,11 @@ class Vocab:
             self.index2word = {self.UNK_token: "<UNK>"}
         self.n_words = len(self.index2word)  # count default tokens
 
+    def getAddIndex(self,word):
+        ret = len(self.word2index.keys())
+        self.word2index[word] = ret
+        return ret
+
     def index_word(self, word):
         if word not in self.word2index:
             self.word2index[word] = self.n_words
