@@ -630,6 +630,12 @@ def main(config):
     mean_pose, mean_dir_vec = pickle.load(open("means.p", "rb"))
     beat_path = args.beat_data_path[0] + "/"
 
+    #combine_speech_vocab_model(args, ["dataset/AQGT/dataset_train_speaker_model.pkl",
+    #                                  "dataset/SaGA/dataset_train_speaker_model.pkl"],
+    #                           "combined_vocab/dataset_train_speaker_model.pkl", fill_word_vectors=True)
+    #combine_speech_vocab_model(args, ["dataset/AQGT/vocab_cache.pkl", "dataset/SaGA/vocab_cache.pkl"],
+    #                           "combined_vocab/vocab_cache.pkl", fill_word_vectors=True)
+
     makeWebDataSet(args, beat_path, mean_dir_vec, mean_pose, collate_fn)
 
     train_loader, val_loader, lang_model, speaker_model = getWebDataSet(args, args.web_data_path,"combined_vocab/")
@@ -648,6 +654,8 @@ def main(config):
 
 
 if __name__ == '__main__':
+    import torch.multiprocessing
+    torch.multiprocessing.set_sharing_strategy('file_system')
     torch.multiprocessing.set_start_method('spawn')
     torch.backends.cudnn.benchmark = True
     torch.backends.cuda.matmul.allow_tf32 = True
