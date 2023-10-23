@@ -163,7 +163,7 @@ class Lightning_Trainer(LightningModule):
         ret_dict = {}
 
         vids = aux_info
-        vid_indices = [self.speaker_model.word2index[vid] for vid in vids]
+        vid_indices = [self.speaker_model.word2index[vid] if vid in self.speaker_model.word2index.keys() else self.speaker_model.getAddIndex(vid) for vid in vids]
         vid_indices = torch.LongTensor(vid_indices).to(device)
         if optimizer_idx == 0:
             self.iteration_step += 1
@@ -354,17 +354,17 @@ def makeWebDataSet(args, beat_path, mean_dir_vec, mean_pose, collate_fn):
             test_dataset.set_lang_model(lang_model)
 
             train_loader = DataLoader(dataset=train_dataset, batch_size=1,
-                                      shuffle=False, drop_last=True, num_workers=2,
+                                      shuffle=False, drop_last=True, num_workers=4,
                                       collate_fn=collate_fn
                                       )
 
             val_loader = DataLoader(dataset=val_dataset, batch_size=1,
-                                    shuffle=False, drop_last=True, num_workers=2,
+                                    shuffle=False, drop_last=True, num_workers=4,
                                     collate_fn=collate_fn
                                     )
 
             test_loader = DataLoader(dataset=test_dataset, batch_size=1,
-                                    shuffle=False, drop_last=True, num_workers=2,
+                                    shuffle=False, drop_last=True, num_workers=4,
                                     collate_fn=collate_fn
                                     )
             os.makedirs(webdataset_path + "/train", exist_ok=False)
@@ -630,12 +630,6 @@ def main(config):
     mean_pose, mean_dir_vec = pickle.load(open("means.p", "rb"))
     beat_path = args.beat_data_path[0] + "/"
 
-    #combine_speech_vocab_model(args, ["dataset/AQGT/dataset_train_speaker_model.pkl",
-    #                                  "dataset/SaGA/dataset_train_speaker_model.pkl"],
-    #                           "combined_vocab/dataset_train_speaker_model.pkl", fill_word_vectors=True)
-    #combine_speech_vocab_model(args, ["dataset/AQGT/vocab_cache.pkl", "dataset/SaGA/vocab_cache.pkl"],
-    #                           "combined_vocab/vocab_cache.pkl", fill_word_vectors=True)
-
     makeWebDataSet(args, beat_path, mean_dir_vec, mean_pose, collate_fn)
 
     train_loader, val_loader, lang_model, speaker_model = getWebDataSet(args, args.web_data_path,"combined_vocab/")
@@ -647,7 +641,7 @@ def main(config):
         amp_backend="apex",
         amp_level='O2',
         gradient_clip_val=0.5, #required for the wgan discriminator. Otherwise the training can produce nan values.
-        callbacks=[TQDMProgressBar(refresh_rate=5)],  # val_check_interval=1000,
+        callbacks=[TQDMProgressBar(refresh_rate=1)],  # val_check_interval=1000,
         benchmark=True, num_sanity_val_steps=2, detect_anomaly=False
     )
     trainer.fit(model)
