@@ -19,9 +19,47 @@ from tqdm import tqdm
 from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC, BertTokenizer, BertModel
 from transformers.utils import PaddingStrategy
 
+import datetime
+import itertools
+import os.path
+import pprint
+import random
+
+
+
+from collections import OrderedDict
+from copy import copy
+from random import shuffle
+
+
+
+import cv2
+import matplotlib
+import torch.nn.functional as F
+import torch.random
+import wandb
+from pytorch_lightning import LightningModule, Trainer
+from pytorch_lightning.callbacks import TQDMProgressBar
+from torch.utils.data import DataLoader
+from torchelie.optim import RAdamW
+
+
+from lookahead import Lookahead
+from model.extra_losses import V7_loss
+from model.AQGT_plus import AqgtPlusGenerator, MyLoopDiscriminator
+from utils.SkeletonHelper.VisualizeHelper import VisualizeCvClass
+from train_eval.train_AQGT_plus import train_dis, train_gen
+from utils.data_utils import convert_dir_vec_to_pose
+from utils.vocab_utils import build_vocab
+
+from config.parse_args import parse_args
+from scripts.data_loader.data_preprocessor import toEntityMap, toOccurenceMap, toPhaseMap, toPhraseMap, \
+    toPositionMap, toShapeMap, toWristMap, toExtendMap, toPracticeMap
+
+
 import utils
 
-from data_loader.data_preprocessor import DataPreprocessor, toEntityMap, toOccurenceMap, toPhaseMap, toPhraseMap, \
+from data_loader.data_preprocessor import toEntityMap, toOccurenceMap, toPhaseMap, toPhraseMap, \
     toPositionMap, toShapeMap, toWristMap, toExtendMap, toPracticeMap
 from data_loader.lmdb_data_loader import proc_audio
 from model.VQVAE_2_audio import VQ_VAE_2_audio
@@ -29,6 +67,7 @@ from scripts.train_lightning import load_lightning_model
 from utils.data_utils import extract_melspectrogram, resampled_get_anno
 from utils.train_utils import create_video_and_save, set_logger
 from config.parse_args import parse_args
+
 
 device = torch.device("cpu")
 audio_vqvae = VQ_VAE_2_audio.load_from_checkpoint("pretrained/vqvae_audio/vqvae_audio.ckpt", strict=False).cuda().eval()
@@ -39,6 +78,24 @@ Wav2Vec2model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 bert_model = BertModel.from_pretrained("bert-base-uncased")
 
+
+def get_words_in_time_range(word_list, start_time, end_time, fps=25):
+        words = []
+
+        start_time = (start_time / 15) * fps
+        end_time = (end_time / 15) * fps
+        for word in word_list:
+            _, word_s, word_e = word[0], word[1], word[2]
+
+            if word_s >= end_time:
+                break
+
+            if word_e <= start_time:
+                continue
+
+            words.append(word)
+
+        return words
 
 
 def generate_gestures(args, pose_decoder, lang_model, audio, words, annotation_data=None, audio_sr=16000, vid=None,
@@ -140,7 +197,7 @@ def generate_gestures(args, pose_decoder, lang_model, audio, words, annotation_d
         time_seq = audio_beat.unsqueeze(0)
 
         # prepare text input
-        word_seq = DataPreprocessor.get_words_in_time_range(word_list=words, start_time=start_frame, end_time=fin_idx, fps=fps)
+        word_seq = get_words_in_time_range(word_list=words, start_time=start_frame, end_time=fin_idx, fps=fps)
         sent = ' '.join([w[0] for w in word_seq])
         if len(sent) > 0:
             print(start_frame / 15, sent)
