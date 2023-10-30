@@ -2,7 +2,6 @@
 import math
 import multiprocessing
 import os
-# sys.path.append("/mnt/98072f92-dbd5-4613-b3b6-f857bcdcdadc/Owncloud/Projekte/Promotion/SEEG-main")
 import pickle
 import threading
 import traceback
