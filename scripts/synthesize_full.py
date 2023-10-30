@@ -20,7 +20,7 @@ from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC, BertTokenizer, BertM
 from transformers.utils import PaddingStrategy
 
 import utils
-from config.parse_args import parse_args
+
 from data_loader.data_preprocessor import DataPreprocessor, toEntityMap, toOccurenceMap, toPhaseMap, toPhraseMap, \
     toPositionMap, toShapeMap, toWristMap, toExtendMap, toPracticeMap
 from data_loader.lmdb_data_loader import proc_audio
@@ -28,6 +28,7 @@ from model.VQVAE_2_audio import VQ_VAE_2_audio
 from scripts.train_lightning import load_lightning_model
 from utils.data_utils import extract_melspectrogram, resampled_get_anno
 from utils.train_utils import create_video_and_save, set_logger
+from config.parse_args import parse_args
 
 device = torch.device("cpu")
 audio_vqvae = VQ_VAE_2_audio.load_from_checkpoint("pretrained/vqvae_audio/vqvae_audio.ckpt", strict=False).cuda().eval()
