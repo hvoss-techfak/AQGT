@@ -386,7 +386,7 @@ def generate_gestures(args, pose_decoder, lang_model, audio, words, annotation_d
 def main(args, mode, checkpoint_path, option, data_version=2):
     args, generator, loss_fn, lang_model, speaker_model, out_dim = load_lightning_model(args, args.checkpoint_path)
     generator = generator.eval()
-    test_data_path = args["test_data_path"][0]
+    test_data_path = args.test_data_path[1]
 
     from torch import nn
     embedding = nn.Embedding.from_pretrained(torch.FloatTensor(lang_model.word_embedding_weights), freeze=True)
