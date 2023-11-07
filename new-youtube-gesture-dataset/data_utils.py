@@ -20,9 +20,9 @@ from config import my_config
 
 ###############################################################################
 # SKELETON
-from SkeletonHelper.helper_function import checkifwordtranscript, convertTime, removeRotation, normalizePosition, \
-    onlyGestures, halpeTo59PoseSkeleton, onlyUpperBodyScores, onlyUpperBodyPoses, deboneUpper, rescaleUpperoneLengths, \
-    reboneUpper, calculateUpperBodyScoreThreshold, checkHandtracked
+from alphapose_helper_function import checkifwordtranscript, convertTime, normalizePosition, \
+    halpeTo59PoseSkeleton, onlyUpperBodyScores, onlyUpperBodyPoses, deboneUpper, rescaleUpperoneLengths, \
+    reboneUpper, checkHandtracked
 
 
 def draw_skeleton_on_image(img, skeleton, thickness=15):

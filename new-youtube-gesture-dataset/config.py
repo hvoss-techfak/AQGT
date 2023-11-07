@@ -17,10 +17,10 @@ class Config:
 
 class TEDConfig(Config):
     YOUTUBE_CHANNEL_ID = "UCAuUUnT6oDeKwE6v1NGQxug"
-    WORK_PATH = 'dataset/AQGT/videos/'
-    CLIP_PATH = WORK_PATH + "/clips"
-    VIDEO_PATH = WORK_PATH + "/withVTT"
-    SKELETON_PATH = WORK_PATH + "/withVTT"
+    WORK_PATH = '../dataset/AQGT/videos/'
+    CLIP_PATH = WORK_PATH + ""
+    VIDEO_PATH = WORK_PATH + ""
+    SKELETON_PATH = WORK_PATH + ""
     SUBTITLE_PATH = VIDEO_PATH
     OUTPUT_PATH = WORK_PATH + "/output"
     VIDEO_SEARCH_START_DATE = datetime(2011, 3, 1, 0, 0, 0)
@@ -28,13 +28,13 @@ class TEDConfig(Config):
     SUBTITLE_TYPE = 'auto'
     FILTER_OPTION = {"threshold": 0.02}
     OVERWRITE_FILTERING = False
-    FILETYPE = '.webm'
+    FILETYPE = '.mp4'
 
 
 
 class TED2Config(Config):
     YOUTUBE_CHANNEL_ID = "UCAuUUnT6oDeKwE6v1NGQxug"
-    WORK_PATH = 'dataset/AQGT/videos/'
+    WORK_PATH = '../dataset/AQGT/videos/'
     CLIP_PATH = WORK_PATH + "/clips"
     VIDEO_PATH = WORK_PATH + "/videos"
     SKELETON_PATH = WORK_PATH + "/videos"
@@ -49,7 +49,7 @@ class TED2Config(Config):
 
 class SaGAConfig(Config):
     YOUTUBE_CHANNEL_ID = "UCAuUUnT6oDeKwE6v1NGQxug"
-    WORK_PATH = 'dataset/SaGA/videos/'
+    WORK_PATH = '../dataset/SaGA/videos/'
     CLIP_PATH = WORK_PATH + "/clips"
     VIDEO_PATH = WORK_PATH + "/SaGA1"
     SKELETON_PATH = WORK_PATH + "/SaGA1"
@@ -64,7 +64,7 @@ class SaGAConfig(Config):
 
 class SaGA_VAL_Config(Config):
     YOUTUBE_CHANNEL_ID = "UCAuUUnT6oDeKwE6v1NGQxug"
-    WORK_PATH = 'dataset/SaGA/videos/'
+    WORK_PATH = '../dataset/SaGA/videos/'
     CLIP_PATH = WORK_PATH + "/video"
     VIDEO_PATH = WORK_PATH + "/video"
     SKELETON_PATH = WORK_PATH + "/video"
@@ -77,5 +77,21 @@ class SaGA_VAL_Config(Config):
     OVERWRITE_FILTERING = False
     FILETYPE = '.mp4'
 
+#PLEASE CHANGE THIS BLOCK TO SET YOUR PATH
+class NewConfig(Config):
+    YOUTUBE_CHANNEL_ID = "UCAuUUnT6oDeKwE6v1NGQxug"
+    WORK_PATH = '../dataset/own/videos/'
+    CLIP_PATH = WORK_PATH + ""
+    VIDEO_PATH = WORK_PATH + ""
+    SKELETON_PATH = WORK_PATH + ""
+    SUBTITLE_PATH = VIDEO_PATH
+    OUTPUT_PATH = WORK_PATH + "/output"
+    VIDEO_SEARCH_START_DATE = datetime(2011, 3, 1, 0, 0, 0)
+    LANG = 'en'
+    SUBTITLE_TYPE = 'auto'
+    FILTER_OPTION = {"threshold": 0.00}
+    OVERWRITE_FILTERING = False
+    FILETYPE = '.mp4'
+
 # SET THIS
-my_config = SaGA_VAL_Config
+my_config = NewConfig

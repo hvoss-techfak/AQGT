@@ -6,13 +6,11 @@
 # Written by Youngwoo Yoon (youngwoo@etri.re.kr)
 # ------------------------------------------------------------------------------
 
-import numpy as np
 import cv2
 import math
 
-from data_utils import get_skeleton_from_frame
 from config import my_config
-from SkeletonHelper.helper_function import halpeToCocoSkeleton, halpeTo59PoseSkeleton, onlyUpperBodyScores, \
+from alphapose_helper_function import halpeTo59PoseSkeleton, onlyUpperBodyScores, \
     calculateUpperBodyScoreThreshold
 
 

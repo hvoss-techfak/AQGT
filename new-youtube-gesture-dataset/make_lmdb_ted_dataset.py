@@ -248,11 +248,10 @@ def make_ted_lmdb_gesture_dataset():
     n_saved_clips = [0, 0, 0]
 
 
-    prefix = ""
-    dataset_train = prefix+"/mnt/ssd-tb/gesture_data_video_entity/dataset_train"#lmdb.open("/mnt/98072f92-dbd5-4613-b3b6-f857bcdcdadc/temp/dataset_train",map_size=map_size)
-    dataset_test = prefix+"/mnt/ssd-tb/gesture_data_video_entity/dataset_test"#lmdb.open("/mnt/98072f92-dbd5-4613-b3b6-f857bcdcdadc/temp/dataset_test",map_size=map_size)
-    dataset_val = prefix+"/mnt/ssd-tb/gesture_data_video_entity/dataset_val"#lmdb.open("/mnt/98072f92-dbd5-4613-b3b6-f857bcdcdadc/temp/dataset_val",map_size=map_size)
-    print(my_config.VIDEO_PATH + "/*.webm")
+    dataset_train = os.path.abspath(my_config.OUTPUT_PATH) + "/train"
+    dataset_val = os.path.abspath(my_config.OUTPUT_PATH) + "/val"
+    dataset_test = os.path.abspath(my_config.OUTPUT_PATH) + "/test"
+
     video_files = list(sorted(glob.glob(my_config.VIDEO_PATH + "/*" + my_config.FILETYPE), key=os.path.getmtime))
     random.shuffle(video_files)
     print(video_files)
@@ -263,9 +262,15 @@ def make_ted_lmdb_gesture_dataset():
     #dataset = lmdb.open(dataset_train, map_size=map_size)
     for v_i, video_file in enumerate(tqdm(video_files)):
         ra = random.randint(0,100)
-        print(v_i)
-        dataset = dataset_train
+        if ra < 10:
+            dataset = dataset_test
+        elif ra < 20:
+            dataset = dataset_val
+        else:
+            dataset = dataset_train
         print(video_file)
+
+        os.makedirs(dataset,exist_ok=True)
 
         tlist.append(exec.submit(run,v_i,video_file,dataset))
         #run(v_i, video_file, dataset)
@@ -286,8 +291,6 @@ def make_ted_lmdb_gesture_dataset():
         except Exception:
             pass
             #traceback.print_exc()
-    np.save("stat_frames.npy",r1)
-    np.save("stat_clips.npy",r2)
 
     # for debugging
     # if vid == 'yq3TQoMjXTw':

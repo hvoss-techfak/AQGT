@@ -10,9 +10,9 @@ from scipy.spatial.transform import Rotation
 # matplotlib.use('Agg')
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-from SkeletonHelper.HandStiffness import calculateAngleForHands, calculateHandStiffness, relaxedByFinger, \
+from HandStiffness import calculateAngleForHands, calculateHandStiffness, relaxedByFinger, \
     getHandFingerTipAnnotationPos
-from SkeletonHelper.helper_function import halpeToCocoSkeleton
+from alphapose_helper_function import halpeToCocoSkeleton
 
 
 def PersonlistToVisualizeSequenceData(personlist):

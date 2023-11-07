@@ -14,6 +14,7 @@ from random import shuffle
 from time import sleep
 
 import numpy as np
+from tqdm import tqdm
 
 from clip_filter import *
 from main_speaker_selector import *
@@ -43,38 +44,39 @@ def run_filtering(scene_data, skeleton_wrapper, video_wrapper):
 
     for i in range(len(scene_data)):
         start_frame_no, end_frame_no = scene_data[i], (scene_data[i + 1] if i+1 < len(scene_data) else skeleton_wrapper.getLen())
-        raw_skeleton_chunk = skeleton_wrapper.get(start_frame_no, end_frame_no)
+        if end_frame_no-start_frame_no > 1:
+            raw_skeleton_chunk = skeleton_wrapper.get(start_frame_no, end_frame_no)
 
-        main_speaker_skeletons = MainSpeakerSelector(raw_skeleton_chunk=raw_skeleton_chunk).get()
+            main_speaker_skeletons = MainSpeakerSelector(raw_skeleton_chunk=raw_skeleton_chunk).get()
 
-        # run clip filtering
-        clip_filter = ClipFilter(video=video, start_frame_no=start_frame_no, end_frame_no=end_frame_no,
-                                 raw_skeleton=raw_skeleton_chunk, main_speaker_skeletons=main_speaker_skeletons)
-        correct_clip = clip_filter.is_correct_clip()
+            # run clip filtering
+            clip_filter = ClipFilter(video=video, start_frame_no=start_frame_no, end_frame_no=end_frame_no,
+                                     raw_skeleton=raw_skeleton_chunk, main_speaker_skeletons=main_speaker_skeletons)
+            correct_clip = clip_filter.is_correct_clip()
 
-        filtering_results, message, debugging_info = clip_filter.get_filter_variable()
-        filter_elem = {'clip_info': [start_frame_no, end_frame_no, correct_clip], 'filtering_results': filtering_results,
-                       'message': message, 'debugging_info': debugging_info}
-        aux_info.append(filter_elem)
+            filtering_results, message, debugging_info = clip_filter.get_filter_variable()
+            filter_elem = {'clip_info': [start_frame_no, end_frame_no, correct_clip], 'filtering_results': filtering_results,
+                           'message': message, 'debugging_info': debugging_info}
+            aux_info.append(filter_elem)
 
-        #if correct_clip:
-            #for i in range(len(main_speaker_skeletons)):
-            #    if len(list(main_speaker_skeletons[i].keys())) > 0:
-            #        skeleton = main_speaker_skeletons[i]["current_3d_pose"]
-            #        cv2.imshow("img", vis.VisUpperBody(skeleton, np.ones(53, )))
-            #        cv2.waitKey(33)
-        #    print("yes")
-        #else:
-        #    print("no")
+            #if correct_clip:
+                #for i in range(len(main_speaker_skeletons)):
+                #    if len(list(main_speaker_skeletons[i].keys())) > 0:
+                #        skeleton = main_speaker_skeletons[i]["current_3d_pose"]
+                #        cv2.imshow("img", vis.VisUpperBody(skeleton, np.ones(53, )))
+                #        cv2.waitKey(33)
+            #    print("yes")
+            #else:
+            #    print("no")
 
-        # save
-        elem = {'clip_info': [start_frame_no, end_frame_no, correct_clip], 'frames': []}
+            # save
+            elem = {'clip_info': [start_frame_no, end_frame_no, correct_clip], 'frames': []}
 
-        if not correct_clip:
+            if not correct_clip:
+                filtered_clip_data.append(elem)
+                continue
+            elem['frames'] = convertToLists(main_speaker_skeletons)
             filtered_clip_data.append(elem)
-            continue
-        elem['frames'] = convertToLists(main_speaker_skeletons)
-        filtered_clip_data.append(elem)
 
     return filtered_clip_data, aux_info
 

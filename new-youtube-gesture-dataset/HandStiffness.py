@@ -1,6 +1,6 @@
 import numpy as np
 
-from SkeletonHelper.helper_function import getAngle
+from alphapose_helper_function import getAngle
 
 
 def calculateCangle(arr):
