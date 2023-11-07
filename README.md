@@ -97,9 +97,8 @@ As part of our ongoing effort, we will add these functionality in the following 
 If you want to create a new lmdb data file, please refer to the "new-youtube-gesture-dataset" folder. \
 The pipeline is essentially the same as the original [youtube-gesture-dataset](https://github.com/youngwoo-yoon/youtube-gesture-dataset). 
 
-Todo: 
-- We are currently in the process of releasing the tracking solution for our dataset, which will be done at a later date.
-- The realtime inference code is currently missing and will be released in the following weeks
+Todo:
+- The realtime inference code is currently missing.
 
 ## Citation
 
