@@ -11,6 +11,13 @@ Pytorch
 Conda/Miniconda
 ```
 
+Please install the requirements:
+
+```
+conda activate aqgt
+pip install -r requirements.txt
+```
+
 Please install Alphapose before performing the tracking and install the requirements. 
 As the Alphapose installation is fairly outdated please try the following install commands if the installation does not work:
 
@@ -55,9 +62,11 @@ After downloading all models the folders should look like this:
 pretrained_files:
 - halpe136_fast_res50_256x192.pth
 - pretrained_h36m_cpn.bin
-- 
+- pretrained_243_h36m_detectron_coco_wtraj.bin
+
 trackers/weights:
 - osnet_ain_x1_0_msmt17_256x128_amsgrad_ep50_lr0.0015_coslr_b64_fb10_softmax_labsmth_flip_jitter.pth
+
 detector/yolo/data:
 - yolov3-spp.weights
 ```
