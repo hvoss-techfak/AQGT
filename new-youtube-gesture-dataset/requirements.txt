@@ -1,1 +1,2 @@
 scenedetect
+numpy==1.19.5
