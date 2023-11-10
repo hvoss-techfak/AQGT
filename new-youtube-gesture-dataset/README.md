@@ -45,11 +45,11 @@ python setup.py build develop
 
 ## Pretrained files
 
-Please download the [Halpe Fastpose](https://github.com/MVIG-SJTU/AlphaPose/blob/master/docs/MODEL_ZOO.md#notes-2) ResNet50-YOLOv3-256x192-Heatmap model from alphapose and put it into the pretrained_files folder
+Please download the [Halpe Fastpose](https://github.com/MVIG-SJTU/AlphaPose/blob/master/docs/MODEL_ZOO.md#notes-2) ResNet50-YOLOv3-256x192-Heatmap model from alphapose and put it into the pretrained_models folder
 
 Please download the [ReID tracking model](https://drive.google.com/file/d/1myNKfr2cXqiHZVXaaG8ZAq_U2UpeOLfG/view), rename it by removing the '(1)' and put it under 'trackers/weights'
 
-Please download the [VideoPose3D model](https://dl.fbaipublicfiles.com/video-pose-3d/pretrained_h36m_cpn.bin) and put it into the pretrained_files folder.
+Please download the [VideoPose3D model](https://dl.fbaipublicfiles.com/video-pose-3d/pretrained_h36m_cpn.bin) and put it into the pretrained_models folder.
 
 Please download the [YoloV3 model](https://pjreddie.com/media/files/yolov3-spp.weights) and put it into the detector/yolo/data folder:
 
@@ -59,7 +59,7 @@ Thank you very much to the original author [dariopavllo](https://github.com/dari
 After downloading all models the folders should look like this:
 
 ```
-pretrained_files:
+pretrained_models:
 - halpe136_fast_res50_256x192.pth
 - pretrained_h36m_cpn.bin
 - pretrained_243_h36m_detectron_coco_wtraj.bin
