@@ -23,6 +23,7 @@ The recommended way to install this project is by using a conda environment:
 ```
 conda create --name aqgt python=3.7
 conda activate aqgt
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
 pip install -r requirements.txt
 ```
 Please refer to the [pytorch](https://pytorch.org/) page, to install pytorch.
