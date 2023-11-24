@@ -131,10 +131,13 @@ You can evaluate the framework and generate videos of the gestures by executing 
 ``` bash eval_AQ-GT.sh ``` for the evaluation of the AQ-GT model. \
 ``` bash eval_AQ-GT-A.sh ``` for the evaluation of the AQ-GT-A model. 
 
+the generated videos can be found in the ```test_full``` folder
+
 Currently, the framework only takes pre-created lmdb data files as input and has no direct interface to create realtime gestures from videos
 
 If you want to create a new lmdb data file, please refer to the "new-youtube-gesture-dataset" folder. \
 The pipeline is essentially the same as the original [youtube-gesture-dataset](https://github.com/youngwoo-yoon/youtube-gesture-dataset).
+
 A few notes and requirements for creating your own videos:
 
 1. Please make sure that your videos are in 25 frames per second. Currently, the model is not converting between framerates.
@@ -144,7 +147,7 @@ A few notes and requirements for creating your own videos:
 When evaluating your own dataset using the AQ-GT-A checkpoint without your own annotations, we recommend forcing "alway iconic and stroke" or "always deictic and stroke" annotations in the "synthesize_full.py" modifier section.
 This change helps in creating more complex and expressive gestures. 
 
-As a default, both options, as well as no change in the annotation files, are enabled. Therefore, three videos per clip will be created 
+As a default, both options, as well as no change in the annotation files are enabled. Therefore, three videos per clip will be created.
 
 
 

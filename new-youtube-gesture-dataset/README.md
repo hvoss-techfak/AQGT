@@ -94,7 +94,7 @@ pip install yt-dlp
 yt-dlp [youtube link] --write-sub --write-auto-sub --sub-lang 'en' 
 ```
 
-After downloading your videos and subtitles, please change the "NewConfig" in config.py to reflect your workpath or put all your files in 'dataset/own/videos/'.
+After downloading your videos and subtitles, please change the "NewConfig" in config.py to reflect your workpath or put all your files in ``` 'dataset/own/videos/' ```.
 The config also assumes ".mp4" files, which can be changed in the configuration file.
 After changing the config, you can run the entire pipeline with:
 ```
@@ -102,5 +102,14 @@ make run
 cd new-youtube-gesture dataset
 bash generate_dataset.sh
 ```
+
+after running the pipeline, new videos can be created with:
+
+```
+make run
+bash eval_own.sh
+```
+the generated videos can be found in the ```test_full``` folder
+
 
 
