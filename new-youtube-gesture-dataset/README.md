@@ -60,7 +60,7 @@ After downloading all models the folders should look like this:
 
 ```
 pretrained_models:
-- halpe136_fast_res50_256x192.pth
+- halpe136_fast50_256x192.pth
 - pretrained_h36m_cpn.bin
 - pretrained_243_h36m_detectron_coco_wtraj.bin
 
