@@ -27,7 +27,7 @@ from common.model import TemporalModel
 from trackers import track
 
 args = types.SimpleNamespace()
-args.checkpoint = "pretrained_models/halpe136_fast_res50_256x192.pth"
+args.checkpoint = "pretrained_models/halpe136_fast50_256x192.pth"
 args.cfg = "configs/256x192_res50_lr1e-3_1x-simple.yaml"
 args.detbatch = 5
 args.posebatch = 60
