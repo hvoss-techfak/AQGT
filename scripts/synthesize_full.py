@@ -473,9 +473,9 @@ def main(args, mode, checkpoint_path, option, data_version=2):
             # modifiers.append(["always gesture Fenster", 0, 0, [((0,), (None,), 3), ]])
             # modifiers.append(["always gesture Tür", 0, 0, [((0,), (None,), 5), ]])
             #
-            # modifiers.append(["always iconic and stroke", 0, 0, [((4, 5), (None,), 1), ((2, 3), (None,), 1)]])
+            modifiers.append(["always iconic and stroke", 0, 0, [((4, 5), (None,), 1), ((2, 3), (None,), 1)]])
             # modifiers.append(["always iconic and prep", 0, 0, [((4, 5), (None,), 1), ((2, 3), (None,), 0)]])
-            # modifiers.append(["always deictic and stroke", 0, 0, [((4, 5), (None,), 2), ((2, 3), (None,), 1)]])
+            modifiers.append(["always deictic and stroke", 0, 0, [((4, 5), (None,), 2), ((2, 3), (None,), 1)]])
             # modifiers.append(["always deictic and prep", 0, 0, [((4, 5), (None,), 2), ((2, 3), (None,), 0)]])
 
             # modifiers.append(["always iconic and stroke and Kirche", 0, 0, [((4, 5), (None,), 1), ((2, 3), (None,), 1),((0,), (None,), 4), ]])
