@@ -183,6 +183,7 @@ def generate_gestures(args, pose_decoder, lang_model, audio, words, annotation_d
         audio_end = audio_start + audio_sample_length
         in_audio = audio[audio_start:audio_end]
         if modifier[2] is None:
+            print("Modifier: removing audio information")
             in_audio *= 0
 
         if len(in_audio) < audio_sample_length:
@@ -255,21 +256,26 @@ def generate_gestures(args, pose_decoder, lang_model, audio, words, annotation_d
                         l_practice = torch.from_numpy(toPracticeMap([f["LeftPractice"] for f in sample_anno])).to(in_audio.device).unsqueeze(0)
                         r_practice = torch.from_numpy(toPracticeMap([f["RightPractice"] for f in sample_anno])).to(in_audio.device).unsqueeze(0)
                         anno = torch.cat((entity_map, occurence_map, l_phase, r_phase, l_phrase, r_phrase, l_position, r_position, s_position, l_hand_shape, r_hand_shape, l_wrist_distance, r_wrist_distance, l_extend, r_extend, l_practice, r_practice), dim=0).unsqueeze(0)
-                        for idx, src_values, dst_value in modifier[3]:
-                            for id in idx:
-                                if id == -1:
-                                    anno[:, :, :] = dst_value
-                                else:
-                                    for sv in src_values:
-                                        if sv is None:
-                                            anno[:, id, :] = dst_value + 1
-                                        else:
-                                            anno[:, id, :][anno[:, id, :] == sv + 1] = dst_value + 1
-                        anno = anno.float()
                     else:
                         anno = torch.zeros(1, 17, 34, device=in_audio.device).float() - 1
                         # print("adding annotation")
                         # print(anno.shape)
+
+                    for idx, src_values, dst_value in modifier[3]:
+                        for id in idx:
+                            if id == -1:
+                                print("Modifier: overwriting all information with value:" + str(dst_value))
+                                anno[:, :, :] = dst_value
+                            else:
+                                for sv in src_values:
+                                    if sv is None:
+                                        print("Modifier: changing id " + str(id) + " with " + str(dst_value))
+                                        anno[:, id, :] = dst_value + 1
+                                    else:
+                                        print("Modifier: changing source and destination for id: " + str(id) + " with " + str(dst_value))
+                                        anno[:, id, :][anno[:, id, :] == sv + 1] = dst_value + 1
+                    anno = anno.float()
+
                     audio_var_bottom = torch.zeros((in_audio1.shape[0], in_audio1.shape[1], 16 * 16),
                                                    device=in_audio1.device)
                     audio_var_top = torch.zeros((in_audio1.shape[0], in_audio1.shape[1], 8 * 8), device=in_audio.device)
@@ -523,6 +529,7 @@ def main(args, mode, checkpoint_path, option, data_version=2):
                                 clip_words[selected_vi][1] -= clip_s_f  # start time
                                 clip_words[selected_vi][2] -= clip_s_f  # end time
                             if mod[1] is None:
+                                print("Modifier: removing text information")
                                 clip_words = []
 
                             for i in tqdm(range(0, max(1,int(clip_length // sequence_length)))):

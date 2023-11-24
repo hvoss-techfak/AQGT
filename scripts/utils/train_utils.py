@@ -332,7 +332,7 @@ def create_video_and_save(save_path, epoch, prefix, iter_idx, target, output, me
     #save video
     try:
         video_path = 'temp_video.mp4'
-        cmd = ['/usr/bin/ffmpeg', '-y','-framerate', '15', '-i', 'vis/%06d.jpg', '-r','15','-crf','18', '-pix_fmt','yuv420p','temp_video.mp4']
+        cmd = ['ffmpeg', '-y','-framerate', '15', '-i', 'vis/%06d.jpg', '-r','15','-crf','18', '-pix_fmt','yuv420p','temp_video.mp4']
         result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
         print(result.returncode, result.stdout, result.stderr)
     except RuntimeError:
@@ -341,7 +341,7 @@ def create_video_and_save(save_path, epoch, prefix, iter_idx, target, output, me
     # merge audio and video
     if audio is not None:
         merged_video_path = 'test_full/{}.mp4'.format(video_filename)
-        cmd = ['/usr/bin/ffmpeg', '-y', '-i', audio_path,'-i', video_path,'-map','1:0','-map','0:0', '-strict', '-2',
+        cmd = ['ffmpeg', '-y', '-i', audio_path,'-i', video_path,'-map','1:0','-map','0:0', '-strict', '-2',
                merged_video_path]
         if clipping_to_shortest_stream:
             cmd.insert(len(cmd) - 1, '-shortest')

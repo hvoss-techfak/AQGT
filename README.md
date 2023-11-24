@@ -9,7 +9,46 @@ with the extension (AQ-GT-A) from the paper: \
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/aq-gt-a-temporally-aligned-and-quantized-gru/gesture-generation-on-ted-gesture-dataset)](https://paperswithcode.com/sota/gesture-generation-on-ted-gesture-dataset?p=aq-gt-a-temporally-aligned-and-quantized-gru)
 
-## Environment & Training 
+## Install with Docker
+
+We recommend docker with the nvidia container toolkit for running the training, evaluation and tracking. For this please install docker (if not already installed):
+```
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+and the nvidia gpu container toolkit:
+```
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+```
+
+After installing the components, the image can simply be build by running:
+```
+make build
+```
+This will install all dependencies and download all pretrained models automatically. The whole build process can tap up to 30 minutes. 
+After building, the image can be run with:
+```
+make run
+```
+The "config","dataset", and the "test_full" folders are mounted automatically, to provide extra input and output. 
+
+## Install without Docker
 
 This repository is developed and tested on Ubuntu 20.04, Python 3.7, and PyTorch 2.0+. 
 ```
@@ -92,14 +131,22 @@ You can evaluate the framework and generate videos of the gestures by executing 
 ``` bash eval_AQ-GT.sh ``` for the evaluation of the AQ-GT model. \
 ``` bash eval_AQ-GT-A.sh ``` for the evaluation of the AQ-GT-A model. 
 
-Currently, the framework only takes precreated lmdb data files as input and has no direct interface to create realtime or on-the-fly gestures from videos.
-As part of our ongoing effort, we will add these functionality in the following weeks.
+Currently, the framework only takes pre-created lmdb data files as input and has no direct interface to create realtime gestures from videos
 
 If you want to create a new lmdb data file, please refer to the "new-youtube-gesture-dataset" folder. \
-The pipeline is essentially the same as the original [youtube-gesture-dataset](https://github.com/youngwoo-yoon/youtube-gesture-dataset). 
+The pipeline is essentially the same as the original [youtube-gesture-dataset](https://github.com/youngwoo-yoon/youtube-gesture-dataset).
+A few notes and requirements for creating your own videos:
 
-Todo:
-- The realtime inference code is currently missing.
+1. Please make sure that your videos are in 25 frames per second. Currently, the model is not converting between framerates.
+2. Background noise and echo in the voice can be very detrimental for the generation of gestures. Please use a good quality microphone or remove any noise using an audio editor ([audacity](https://manual.audacityteam.org/man/noise_reduction.html))
+3. Ensure that all of your body is visible in your own dataset. Currently, bone filtering is turned off (OVERWRITE_FILTERING = True in config.py), but the generation quality can suffer from missing or occluded bones.
+
+When evaluating your own dataset using the AQ-GT-A checkpoint without your own annotations, we recommend forcing "alway iconic and stroke" or "always deictic and stroke" annotations in the "synthesize_full.py" modifier section.
+This change helps in creating more complex and expressive gestures. 
+
+As a default, both options, as well as no change in the annotation files, are enabled. Therefore, three videos per clip will be created 
+
+
 
 ## Citation
 

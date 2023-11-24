@@ -119,6 +119,7 @@ def doThread(csv_path):
                             return 0
 
                         if len(skeleton_wrapper.skeletons) == 0:
+                            print('[Fatal error] no Skeleton data found')
                             return 0
                         if abs(video_wrapper.total_frames - len(skeleton_wrapper.skeletons)) > 10:
                             print('[Fatal error] video and skeleton object have different lengths (video: {}, skeletons: {})'.format

@@ -5,8 +5,7 @@
 # You can refer to details of AIR project at https://aiforrobots.github.io
 # Written by Youngwoo Yoon (youngwoo@etri.re.kr)
 # ------------------------------------------------------------------------------
-
-
+import glob
 import os
 import random
 import traceback
@@ -21,10 +20,11 @@ from scipy import signal
 from tqdm import tqdm_gui, tqdm
 import unicodedata
 
-from saga_dataloader import SaGA_dataloader
+from webvtt import WebVTT
 
-from data_utils import *
 
+from config import my_config
+from data_utils import load_clip_data,read_video,SubtitleWrapper
 
 def read_subtitle(vid):
     postfix_in_filename = '-en.vtt'
@@ -49,6 +49,7 @@ def unicode_to_ascii(s):
 # lowercase, trim, and remove non-letter characters
 def normalize_string(s):
     s = unicode_to_ascii(s.lower().strip())
+    import re
     s = re.sub(r"([,.!?])", r" \1 ", s)  # isolate some marks
     s = re.sub(r"(['])", r"", s)  # remove apostrophe
     s = re.sub(r"[^a-zA-Z,.!?]+", r" ", s)  # replace other characters with whitespace
@@ -124,6 +125,7 @@ def run(v_i,video_file,dataset_file):
 
             print(my_config.VIDEO_PATH + '/' + vid)
             try:
+                from saga_dataloader import SaGA_dataloader
                 saga_loader = SaGA_dataloader(my_config.VIDEO_PATH + '/' + vid)
             except Exception:
                 print('[WARNING] No SaGA data found. Not adding annotation information')
@@ -268,6 +270,9 @@ def make_ted_lmdb_gesture_dataset():
             dataset = dataset_val
         else:
             dataset = dataset_train
+        if my_config.OVERWRITE_FILTERING:
+            print("Info: Adding all files to the test set as 'overwrite filtering' in the config is enabled")
+            dataset = dataset_test
         print(video_file)
 
         os.makedirs(dataset,exist_ok=True)

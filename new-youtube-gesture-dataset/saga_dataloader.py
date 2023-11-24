@@ -5,13 +5,13 @@ import cv2
 import pympi
 import bz2
 
-import librosa
+
 import numpy as np
 import pickle
 
 from tqdm import tqdm
 
-from helper_function import annotationsToTimings, getHandPositions, getAllAnnotationInRange, getAnnotationwithTiming, getEntityFromWordList, getAnnotationFromTime, getPositionFromWordList
+from helper_function import getHandPositions, getAllAnnotationInRange, getAnnotationwithTiming, getEntityFromWordList, getPositionFromWordList
 
 __VERSION__ = 0.1
 
@@ -142,6 +142,7 @@ class SaGA_dataloader():
             self.video_cap = video
 
         if self.return_audio_frames:
+            import librosa
             audio, samplingrate = librosa.load(self.video_file, sr=16000)
             fps_samplerate = int(16000//self.fps)
             if audio.shape[0] % fps_samplerate != 0:

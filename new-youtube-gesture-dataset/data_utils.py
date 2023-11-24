@@ -161,16 +161,15 @@ class AlphaSkeletonWrapper:
 
     def __init__(self, basepath, vid):
         # load skeleton data (and save it to pickle for next load)
-        pickle_file = glob.glob(basepath + '/' + vid + '_calc.kp')
+        pickle_file = basepath + '/' + vid + '_calc.kp'
 
         if pickle_file:
             try:
-                with open(pickle_file[0], 'rb') as file:
+                with open(pickle_file, 'rb') as file:
                     self.skeletons = pickle.load(bz2.BZ2File(file, "rb"))
             except Exception as e:
                 import traceback
                 traceback.print_exc()
-                print(file)
                 raise e
 
     def getLen(self):
@@ -332,7 +331,7 @@ class SubtitleWrapper:
         postfix_in_filename = '.'+lang+'.vtt'
         #print(my_config.SUBTITLE_PATH + '/*' + vid + postfix_in_filename)
 
-        file_list = glob.glob(my_config.SUBTITLE_PATH + '/*' + vid + postfix_in_filename)
+        file_list = [my_config.SUBTITLE_PATH + '/' + vid + postfix_in_filename,]
         if len(file_list) > 1:
             print('more than one subtitle. check this.', file_list)
             self.subtitle = None
@@ -342,7 +341,7 @@ class SubtitleWrapper:
             self.subtitle = convertVTT(vtt_file)
         else:
             print('subtitle file does not exist')
-            print(my_config.SUBTITLE_PATH + '/*' + vid + postfix_in_filename)
+            print(my_config.SUBTITLE_PATH + '/' + vid + postfix_in_filename)
 
             self.subtitle = None
 

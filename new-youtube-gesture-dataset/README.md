@@ -2,7 +2,13 @@
 
 this is the code to track and generate the original BiGe/SaGA dataset or use it to generate your own dataset.
 
-## Prerequisites
+## Installation with Docker
+
+The docker image of the root project automatically installs all necessary files and downloads all pretrained models.
+Simply refer to the installation instruction of the root project to build and run the docker image.
+
+
+## Installation without Docker
 
 This repository is developed and tested on Ubuntu 20.04, Python 3.7, and PyTorch 2.0+. 
 ```
@@ -43,7 +49,7 @@ export LANG=C.UTF-8
 python setup.py build develop
 ```
 
-## Pretrained files
+### Pretrained files
 
 Please download the [Halpe Fastpose](https://github.com/MVIG-SJTU/AlphaPose/blob/master/docs/MODEL_ZOO.md#notes-2) ResNet50-YOLOv3-256x192-Heatmap model from alphapose and put it into the pretrained_models folder
 
@@ -76,6 +82,12 @@ detector/yolo/data:
 In addition to the video file, the pipeline needs a subtitle file. 
 At the moment the project only takes ELAN files (which you would have to annotate manually) or Youtube subtitle files. 
 
+A few notes and requirements for creating the videos:
+
+1. Please make sure that your videos are in 25 frames per second. Currently, the model is not converting between framerates.
+2. Background noise and echo in the voice can be very detrimental for the generation of gestures. Please use a good quality microphone or remove any noise using an audio editor ([audacity](https://manual.audacityteam.org/man/noise_reduction.html))
+3. Ensure that all of your body is visible in your own dataset. Currently, bone filtering is turned off (OVERWRITE_FILTERING = True in config.py), but the generation quality can suffer from missing or occluded bones.
+
 To download youtube files with the automatic subtitles enabled, one can use yt-dlp:
 ```
 pip install yt-dlp
@@ -86,7 +98,9 @@ After downloading your videos and subtitles, please change the "NewConfig" in co
 The config also assumes ".mp4" files, which can be changed in the configuration file.
 After changing the config, you can run the entire pipeline with:
 ```
-conda activate aqgt
+make run
+cd new-youtube-gesture dataset
 bash generate_dataset.sh
 ```
+
 

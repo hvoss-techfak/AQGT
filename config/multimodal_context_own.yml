@@ -1,0 +1,51 @@
+name: multimodal_context
+
+#generation config for own dataset
+
+train_data_path: []
+val_data_path: []
+test_data_path: ["dataset/own/videos/output/train/"]
+beat_data_path: "beat_temp/"
+web_data_path: []
+
+wandb_key: ""
+
+wordembed_dim: 300
+wordembed_path: crawl-300d-2M-subword.bin
+
+model_save_path: output/train_beat_with-cat_emb_with-lrelu_200ep_dis-add-layer
+random_seed: -1
+
+# model params
+model: multimodal_context
+checkpoint_path: "pretrained/aqgt-a_checkpoint.ckpt"
+
+n_layers: 4
+hidden_size: 500
+z_type: speaker  # speaker, random, none
+input_context: both  # both, audio, text, none
+max_v: 5000
+
+# train params
+epochs: 500
+batch_size: 32 #256
+learning_rate: 1e-5
+loss_regression_weight: 20.0
+loss_gan_weight: 2.0
+loss_warmup: 10
+loss_kld_weight: 0.004
+loss_reg_weight: 0.002
+loss_vel_weight: 0.0002
+
+dropout_prob: 0.1
+
+# eval params
+eval_net_path: pretrained/gesture_autoencoder_checkpoint_best.bin
+
+# dataset params
+motion_resampling_framerate: 15
+n_poses: 34
+n_pre_poses: 4
+subdivision_stride: 8
+
+loader_workers: 16
