@@ -142,7 +142,7 @@ A few notes and requirements for creating your own videos:
 
 1. Please make sure that your videos are in 25 frames per second. Currently, the model is not converting between framerates.
 2. Background noise and echo in the voice can be very detrimental for the generation of gestures. Please use a good quality microphone or remove any noise using an audio editor ([audacity](https://manual.audacityteam.org/man/noise_reduction.html))
-3. Ensure that all of your body is visible in your own dataset. Currently, bone filtering is turned off (OVERWRITE_FILTERING = True in config.py), but the generation quality can suffer from missing or occluded bones.
+3. Ensure that all of your body is visible in your own dataset. The generation quality can suffer from missing or occluded bones.
 
 When evaluating your own dataset using the AQ-GT-A checkpoint without your own annotations, we recommend forcing "alway iconic and stroke" or "always deictic and stroke" annotations in the "synthesize_full.py" modifier section.
 This change helps in creating more complex and expressive gestures. 
