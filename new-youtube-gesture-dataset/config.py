@@ -79,7 +79,7 @@ class SaGA_VAL_Config(Config):
 
 #PLEASE CHANGE THIS BLOCK TO SET YOUR PATH
 class NewConfig(Config):
-    YOUTUBE_CHANNEL_ID = "UCAuUUnT6oDeKwE6v1NGQxug"
+    YOUTUBE_CHANNEL_ID = ""
     WORK_PATH = '../dataset/own/videos/'
     CLIP_PATH = WORK_PATH + ""
     VIDEO_PATH = WORK_PATH + ""
@@ -90,7 +90,7 @@ class NewConfig(Config):
     LANG = 'en'
     SUBTITLE_TYPE = 'auto'
     FILTER_OPTION = {"threshold": 0.00}
-    OVERWRITE_FILTERING = False
+    OVERWRITE_FILTERING = True
     FILETYPE = '.mp4'
 
 # SET THIS

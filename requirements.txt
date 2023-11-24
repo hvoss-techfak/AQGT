@@ -31,3 +31,4 @@ git+https://github.com/vermeille/Torchelie@25f7b9b894ab267294269ad86234f2cce323e
 ffmpeg
 scenedetect
 ninja
+mediapipe
