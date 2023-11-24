@@ -47,4 +47,4 @@ n_poses: 34
 n_pre_poses: 4
 subdivision_stride: 8
 
-loader_workers: 16
+loader_workers: 1
