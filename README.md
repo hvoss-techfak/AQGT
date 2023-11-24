@@ -1,11 +1,11 @@
 # AQ-GT / AQ-GT-A 
 
 This project is the official pytorch implementation of: \
-*AQ-GT: a Temporally Aligned and Quantized GRU-Transformer for Co-Speech Gesture Synthesis* 
+[*AQ-GT: a Temporally Aligned and Quantized GRU-Transformer for Co-Speech Gesture Synthesis* ](https://dl.acm.org/doi/10.1145/3577190.3614135)
 
 
 with the extension (AQ-GT-A) from the paper: \
-*Augmented Co-Speech Gesture Generation: Including Form and Meaning Features to Guide Learning-Based Gesture Synthesis*. 
+[*Augmented Co-Speech Gesture Generation: Including Form and Meaning Features to Guide Learning-Based Gesture Synthesis*](https://arxiv.org/abs/2307.09597)
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/aq-gt-a-temporally-aligned-and-quantized-gru/gesture-generation-on-ted-gesture-dataset)](https://paperswithcode.com/sota/gesture-generation-on-ted-gesture-dataset?p=aq-gt-a-temporally-aligned-and-quantized-gru)
 
