@@ -20,11 +20,13 @@ from config import my_config
 def run_pyscenedetect(file_path, vid):  # using Pyscenedetect
     cmd = 'scenedetect --input "{}" --output "{}" -d 4 detect-content list-scenes'.format(file_path, os.path.abspath(
         my_config.CLIP_PATH))
+    path = os.getcwd()
     os.chdir(my_config.VIDEO_PATH)
     print(my_config.CLIP_PATH)
     print('  ' + cmd)
     subprocess.run(cmd, shell=True, check=True)
     subprocess.run("exit", shell=True, check=True)
+    os.chdir(path)
 
 def doThread(file_path):
     if file_path.endswith(my_config.FILETYPE):
