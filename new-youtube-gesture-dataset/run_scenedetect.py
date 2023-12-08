@@ -33,11 +33,12 @@ def doThread(file_path):
             file_path = os.path.abspath(file_path)
             #print('{}/{}'.format(i + 1, n_total))
             vid = os.path.basename(file_path).replace(my_config.FILETYPE,"")
-            csv_files = [my_config.CLIP_PATH + "/" + f for f in os.listdir(my_config.CLIP_PATH) if f.endswith(".csv")]
-            if len(csv_files) > 0 and os.path.getsize(csv_files[0]):  # existing and not empty
-                print('  CSV file already exists ({})'.format(vid))
-            else:
+            if not os.path.exists(my_config.CLIP_PATH + "/" + vid + "-Scenes.csv"):
+                print('  Detecting scenes ({})'.format(vid))
                 run_pyscenedetect(file_path, vid)
+            else:
+                print('  CSV file already exists ({})'.format(my_config.CLIP_PATH + "/" + vid + "-Scenes.csv"))
+
 
 def main():
     if not os.path.exists(my_config.CLIP_PATH):
