@@ -258,10 +258,12 @@ def make_ted_lmdb_gesture_dataset():
     random.shuffle(video_files)
     print(video_files)
     tlist = []
-    exec = ThreadPoolExecutor(max_workers=8)
     map_size = 1024 * 200  # in MB
     map_size <<= 20  # in B
     #dataset = lmdb.open(dataset_train, map_size=map_size)
+    ef = 0
+    ret_frames = []
+    ret_clips = []
     for v_i, video_file in enumerate(tqdm(video_files)):
         ra = random.randint(0,100)
         if ra < 10:
@@ -277,25 +279,17 @@ def make_ted_lmdb_gesture_dataset():
 
         os.makedirs(dataset,exist_ok=True)
 
-        tlist.append(exec.submit(run,v_i,video_file,dataset))
-        #run(v_i, video_file, dataset)
-    tbar = tqdm(tlist)
-    ef = 0
-    ret_frames = []
-    ret_clips = []
-    for t in tbar:
+        #tlist.append(exec.submit(run,v_i,video_file,dataset))
         try:
-            frames,clips = t.result()
+            frames,clips = run(v_i, video_file, dataset)
             ret_frames.extend(frames)
             ret_clips.append(clips)
             r1 = np.asarray(ret_frames)
             r2 = np.asarray(ret_clips)
             print("frames:",r1.min(),r1.max(),  np.median(r1),np.std(r1),r1.sum())
             print("clips:", r2.min(), r2.max(), np.median(r2),np.std(r2),r2.sum())
-
         except Exception:
             pass
-            #traceback.print_exc()
 
     # for debugging
     # if vid == 'yq3TQoMjXTw':
