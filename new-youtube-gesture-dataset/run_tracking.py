@@ -57,6 +57,6 @@ if __name__ == '__main__':
     vv = [folder + "/" + f for f in os.listdir(folder + "/")]
 
     for f in vv:
-        if f.endswith(".mp4") or f.endswith(".webm"):
+        if f.endswith(my_config.FILETYPE):
             doThread(f)
 
