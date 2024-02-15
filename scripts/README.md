@@ -49,8 +49,7 @@ right extend         = 14 ; with a value between 1 and 4\
 left practice       = 15 ; with a value between 1 and 14\
 right practice       = 16 ; with a value between 1 and 14\
 
-Please refer to the ```AQGT/scripts/data_loader/data_preprocessor.py``` file, to find out the clear name label of each annotation. \
-``` Please also note, that we add +1 to each of the clear name values to have an empty padding value ``` 
+Please refer to the ```AQGT/scripts/data_loader/data_preprocessor.py``` file, to find out the clear name label of each annotation.
 
 After giving the index (or multiple indices) of the annotation as the first element, we can change the parts of the input with the "Source" and "Destination Values".
 We can give multiple entries as the source values and a single destination value. For the specified index, all values with the source values are then changed to the destination value.
